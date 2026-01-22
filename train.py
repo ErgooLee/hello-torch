@@ -26,13 +26,13 @@ def train_val_data_process():
 
     val_loader = Data.DataLoader(dataset=val_data,
                                  batch_size=128,
-                                 shuffle=True,
+                                 shuffle=False,
                                  num_workers=8)
 
     return train_loader, val_loader
 
 
-def train_model_process(model, loader, epochs, lr=1e-3, device=None):
+def train_model_process(model, loader, epochs, lr=1e-3):
 
     model.to(device)
 
