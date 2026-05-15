@@ -1,14 +1,9 @@
-import time
-
 import torch
 from torchvision.datasets import FashionMNIST
 from torchvision import transforms
 import torch.utils.data as Data
 import torch.nn as nn
-import copy
-import numpy as np
-import matplotlib.pyplot as plt
-from LeNet import LeNet
+from paoge.LeNet import LeNet
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
