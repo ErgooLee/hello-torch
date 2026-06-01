@@ -59,7 +59,7 @@ for epoch in range(num_epochs):
         l.backward()
         sgd([w, b], lr)
     with torch.no_grad():
-        train_l = loss(net(features, w, b), labels)
+        train_l = loss(net(features, w, b), labels).mean()
         print(f'epoch {epoch + 1}, train loss: {float(train_l.mean()):.4f}')
 
 print(f"w: {w}, b: {b}")
