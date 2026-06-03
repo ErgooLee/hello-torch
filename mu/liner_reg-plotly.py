@@ -3,14 +3,7 @@ import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
 import webbrowser
-
-
-def synthetic_data(w, b, num_examples):
-    """y = Xw +b + c"""
-    X = torch.normal(0, 1, (num_examples, len(w)))
-    y = torch.mv(X, w) + b
-    y += torch.normal(0, 0.01, y.shape)
-    return X, y.reshape(-1, 1)
+from my_lib import synthetic_data
 
 
 # 1. 生成数据
