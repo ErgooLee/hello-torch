@@ -1,6 +1,7 @@
 import os
 import torch
 import torch.nn as nn
+from torch.nn import ReLU
 from torchvision import datasets, transforms
 from torch.utils import data
 from torch import optim
@@ -33,8 +34,21 @@ def main():
     test_loader = data.DataLoader(test_set, batch_size=batch_size, shuffle=False)
 
     # 模型搭建与初始化
-    linear = nn.Linear(784, 10)
-    net = nn.Sequential(nn.Flatten(), linear)
+    first_layer = nn.Linear(784, 256)
+    second_layer = nn.Linear(256, 10)
+
+    # 2. 故意将所有层权重全部初始化为 0（陷阱）
+    nn.init.constant_(first_layer.weight, 0.0)
+    nn.init.constant_(first_layer.bias, 0.0)
+    nn.init.constant_(second_layer.weight, 0.0)
+    nn.init.constant_(second_layer.bias, 0.0)
+
+    # nn.init.normal_(first_layer.weight, mean=0, std=0.01)
+    # nn.init.constant_(first_layer.bias, 0)
+    # nn.init.normal_(second_layer.weight, mean=0, std=0.01)
+    # nn.init.constant_(second_layer.bias, 0)
+
+    net = nn.Sequential(nn.Flatten(), first_layer, nn.ReLU(), second_layer)
 
     loss = nn.CrossEntropyLoss()
     optimizer = optim.SGD(net.parameters(), lr=0.1)
