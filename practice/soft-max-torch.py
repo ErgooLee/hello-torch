@@ -20,6 +20,7 @@ def evaluate_accuracy(net, data_loader):
             right_count += correct_count(net(x), y)
     return right_count / len(data_loader.dataset)
 
+
 def main():
     batch_size = 64
     transform = transforms.Compose([transforms.ToTensor()])
@@ -43,19 +44,24 @@ def main():
 
     for epoch in range(epochs):
         net.train()
+        right_count_train = 0
         total_loss, total_samples = 0.0, 0
         for batchx, batchy in train_loader:
             optimizer.zero_grad()
-            batch_loss = loss(net(batchx), batchy)
+            y_hat = net(batchx)
+            batch_loss = loss(y_hat, batchy)
             batch_loss.backward()
             optimizer.step()
 
             total_loss += batch_loss.item() * batchy.numel()
             total_samples += batchy.numel()
+            right_count_train += correct_count(y_hat, batchy)
 
         avg_loss = total_loss / total_samples
+        accuracy_train = right_count_train / total_samples
         accuracy = evaluate_accuracy(net, test_loader)
-        print(f"Epoch {epoch + 1:02d}/{epochs} | Train Loss: {avg_loss:.4f} | Test Acc: {accuracy:.4f}")
+        print(
+            f"Epoch {epoch + 1}/{epochs} | Train Loss: {avg_loss:.4f} | Train Acc :{accuracy_train:.4f} Test Acc: {accuracy:.4f}")
 
 
 if __name__ == '__main__':

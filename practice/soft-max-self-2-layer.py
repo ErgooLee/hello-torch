@@ -110,6 +110,7 @@ def main():
     # 2. 增加每轮平均 Loss 打印
     for epoch in range(epochs):
         total_loss, total_samples = 0.0, 0
+        right_count_train = 0
         for batchx, batchy in train_loader:
             y_hat = two_layers_net(batchx, w1, b1, w2, b2)
             batch_loss = across_loss(y_hat, batchy)
@@ -118,14 +119,17 @@ def main():
 
             total_loss += batch_loss.item() * batchy.numel()
             total_samples += batchy.numel()
+            right_count_train += correct_count(y_hat, batchy)
 
         with torch.no_grad():
             right_count = 0
             for batchx, batchy in test_loader:
                 right_count += correct_count(two_layers_net(batchx, w1, b1, w2, b2), batchy)
+            accuracy_train = right_count_train / total_samples
             accuracy = right_count / len(test_loader.dataset)
             avg_loss = total_loss / total_samples
-            print(f"Epoch {epoch + 1}/{epochs} | Train Loss: {avg_loss:.4f} | Test Acc: {accuracy:.4f}")
+            print(
+                f"Epoch {epoch + 1}/{epochs} | Train Loss: {avg_loss:.4f} | Train Acc :{accuracy_train:.4f} Test Acc: {accuracy:.4f}")
 
 
 if __name__ == '__main__':
