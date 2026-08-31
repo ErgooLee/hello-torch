@@ -3,13 +3,6 @@ from torch import nn, device
 from torchvision.datasets import FashionMNIST
 from torchvision import transforms
 from torch.utils import data
-import matplotlib.pyplot as plt
-
-FASHION_MNIST_LABELS = [
-    "t-shirt", "trouser", "pullover", "dress", "coat",
-    "sandal", "shirt", "sneaker", "bag", "ankle boot"
-]
-
 
 def get_device() -> device:
     if torch.backends.mps.is_available():
@@ -27,11 +20,11 @@ class LeNet(nn.Module):
         super().__init__()
         self.conv = nn.Sequential(
             nn.Conv2d(1, 6, kernel_size=5, padding=2),
-            nn.Sigmoid(),
-            nn.AvgPool2d(kernel_size=2, stride=2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Conv2d(6, 16, kernel_size=5),
-            nn.Sigmoid(),
-            nn.AvgPool2d(kernel_size=2, stride=2),
+            nn.ReLU(),
+            nn.MaxPool2d(kernel_size=2, stride=2),
         )
         self.fc = nn.Sequential(
             nn.Flatten(),
