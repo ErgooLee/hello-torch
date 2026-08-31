@@ -20,16 +20,24 @@ class LeNet(nn.Module):
         super().__init__()
         self.conv = nn.Sequential(
             nn.Conv2d(1, 6, kernel_size=5, padding=2),
+            nn.BatchNorm2d(6),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2),
             nn.Conv2d(6, 16, kernel_size=5),
+            nn.BatchNorm2d(16),
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2, stride=2),
         )
         self.fc = nn.Sequential(
             nn.Flatten(),
             nn.Linear(16 * 5 * 5, 120),
+            nn.BatchNorm1d(120),
+            nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(120, 84),
+            nn.BatchNorm1d(84),
+            nn.ReLU(),
+            nn.Dropout(0.5),
             nn.Linear(84, 10),
         )
 
