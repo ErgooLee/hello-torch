@@ -3,7 +3,7 @@ from torch import nn, device
 from torchvision.datasets import FashionMNIST
 from torchvision import transforms
 from torch.utils import data
-from torchinfo import summary
+from practice.model_summary import print_model_flow
 
 def get_device() -> device:
     if torch.backends.mps.is_available():
@@ -106,7 +106,7 @@ def show_LeNet():
 
     model = LeNet().to(device)
 
-    summary(model, input_size=(1, 1, 28, 28), col_names=["input_size", "output_size", "num_params", "kernel_size"])
+    print_model_flow(model, input_size=(1, 1, 28, 28))
 
     # train(model, train_loader, test_loader, epochs=10, lr=1e-3, device=device)
 
