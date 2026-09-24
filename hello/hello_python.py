@@ -1,157 +1,399 @@
-# 导入模块 (类似于 Kotlin 的 import)
-from dataclasses import dataclass
-from typing import List, Dict, Optional
-
 # ==========================================
-# 1. 变量与基础类型 (Variables & Types)
+# Python 基础语法练习
+# 适合 Java / Kotlin 开发者
 # ==========================================
-print("--- 1. Variables ---")
-
-# Python 是动态类型，不需要 val/var。
-# 约定俗成：全大写表示常量 (类似于 Kotlin 的 const val)
-PI = 3.14
-
-# 普通变量 (类似于 Kotlin 的 var)
-name = "Python"
-age = 30
-
-# Python 3.6+ 支持类型提示 (Type Hints)，这对 Kotlin 开发者非常友好！
-# 注意：这仅仅是“提示”，Python 解释器在运行时不会强制检查它。
-city: str = "Beijing"
-is_developer: bool = True  # 首字母大写：True, False, None (Kotlin 中是 true, false, null)
-
-# 字符串插值 (f-string，类似于 Kotlin 的 "$name is $age")
-print(f"My name is {name}, I am {age} years old.")
 
 
 # ==========================================
-# 2. 空值处理 (Nullability)
+# 1. 变量和基本类型
 # ==========================================
-print("\n--- 2. Nullability ---")
 
-# Python 中用 None 表示空值 (等同于 Kotlin 的 null)
-# Python 没有 Kotlin 的 `?` 安全调用和 `?:` Elvis 操作符
-address: Optional[str] = None # 等同于 Kotlin 的 String?
+name = "Tom"
+age = 18
+score = 95.5
+is_ok = True
+nothing = None
 
-if address is None: # 推荐用 is 判断 None
-    print("Address is not provided")
+print("===== 1. 变量和基本类型 =====")
+print(name)
+print(age)
+print(score)
+print(is_ok)
+print(nothing)
 
-# 模拟 Kotlin 的 Elvis 操作符: val res = address ?: "Default"
-res = address or "Default Address"
-print(f"Resolved address: {res}")
-
-
-# ==========================================
-# 3. 集合 (Collections)
-# ==========================================
-print("\n--- 3. Collections ---")
-
-# 列表 List (等同于 Kotlin 的 MutableList)
-fruits: List[str] = ["apple", "banana", "cherry"]
-fruits.append("orange") # 相当于 fruits.add()
-print(f"First fruit: {fruits[0]}") # 索引访问一致
-
-# 字典 Dictionary (等同于 Kotlin 的 MutableMap)
-user_map: Dict[str, int] = {"Alice": 25, "Bob": 30}
-user_map["Charlie"] = 35
-print(f"Alice's age: {user_map.get('Alice')}") # 安全获取，找不到返回 None
-
-# 元组 Tuple (Python 特有，可以理解为不可变的 List，常用来返回多个值)
-coordinates = (10.0, 20.0)
-
+print(type(name) == str)
+print(isinstance(age, int))
+print(type(score))
+print(type(is_ok))
+print(type(nothing))
 
 # ==========================================
-# 4. 控制流 (Control Flow)
+# 2. 字符串
 # ==========================================
-print("\n--- 4. Control Flow ---")
 
-# 重点：Python 没有大括号 {}，完全依赖缩进 (Indentation) 和冒号 (:)
-score = 85
+print("\n===== 2. 字符串 =====")
 
-if score >= 90:
-    print("A")
-elif score >= 80:       # 注意：是 elif，不是 else if
-    print("B")
+name = "Alice"
+
+print(name)
+print(len(name))
+print(name.upper())
+print(name.lower())
+
+# f-string
+age = 18
+print(f"{name} is {age} years old")
+
+# ==========================================
+# 3. List
+# ==========================================
+
+print("\n===== 3. List =====")
+
+numbers = [1, 2, 3, 4, 5]
+
+# 访问元素
+print(numbers[0])
+print(numbers[1])
+# -1是最后一个元素
+print(numbers[-1])
+
+# 添加元素
+numbers.append(6)
+print(numbers)
+
+# 删除元素
+numbers.remove(3)
+print(numbers)
+
+# 修改元素
+numbers[0] = 100
+print(numbers)
+
+# List 长度
+print(len(numbers))
+
+# 切片 左闭右开
+numbers = [1, 2, 3, 4, 5]
+
+print(numbers[1:4])  # [2, 3, 4]
+print(numbers[:3])  # [1, 2, 3]
+print(numbers[2:])  # [3, 4, 5]
+print(numbers[:])  # [1, 2, 3, 4, 5]
+
+# ==========================================
+# 4. Tuple
+# ==========================================
+
+print("\n===== 4. Tuple =====")
+
+point = (10, 20, 30, 40, 50)
+
+print(point)
+print(point[0])
+print(point[1])
+
+# Tuple 不允许修改
+# point[0] = 100  # 取消注释会报错
+
+
+# ==========================================
+# 5. Dictionary
+# ==========================================
+
+print("\n===== 5. Dictionary =====")
+
+person = {
+    "name": "Alice",
+    "age": 18,
+    "city": "Shanghai"
+}
+
+print(person)
+
+# 根据 key 获取 value
+print(person["name"])
+print(person["age"])
+
+# 添加
+person["job"] = "Android Developer"
+
+print(person)
+
+# 修改
+person["age"] = 20
+
+print(person)
+
+# 遍历 key 和 value
+for key, value in person.items():
+    print(key, value)
+
+# ==========================================
+# 6. Set
+# ==========================================
+
+print("\n===== 6. Set =====")
+
+numbers = {1, 2, 3, 3, 4}
+
+# Set 会自动去重
+print(numbers)
+
+numbers.add(5)
+
+print(numbers)
+
+numbers.remove(2)
+
+print(numbers)
+
+# ==========================================
+# 7. if / elif / else
+# ==========================================
+
+print("\n===== 7. if =====")
+
+age = 20
+
+if age < 18:
+    print("child")
+elif age < 60:
+    print("adult")
 else:
-    print("C")
+    print("old")
 
-# For 循环 (相当于 Kotlin 的 for (fruit in fruits))
-for fruit in fruits:
-    print(f"Iterating: {fruit}")
+# ==========================================
+# 8. for
+# ==========================================
 
-# 范围循环 (相当于 Kotlin 的 for (i in 0 until 5))
+print("\n===== 8. for =====")
+
+# range(5) -> 0, 1, 2, 3, 4
 for i in range(5):
-    print(f"Index: {i}")
+    print(i)
 
-# 列表推导式 (List Comprehension) - Python 的精髓！
-# 相当于 Kotlin 的 fruits.map { it.uppercase() }.filter { it.startswith("A") }
-a_fruits = [f.upper() for f in fruits if f.startswith("a")]
-print(f"A fruits: {a_fruits}")
+names = ["Tom", "Bob", "Alice"]
 
-
-# ==========================================
-# 5. 函数与 Lambda (Functions)
-# ==========================================
-print("\n--- 5. Functions ---")
-
-# 用 def 定义函数 (相当于 Kotlin 的 fun)
-def greet(person: str, greeting: str = "Hello") -> str:
-    """这是函数的文档字符串 (Docstring)，写在这里。"""
-    return f"{greeting}, {person}!"
-
-print(greet("Kotlin Dev"))
-print(greet(greeting="Hi", person="Python")) # 命名参数，和 Kotlin 一样
-
-# Lambda 表达式
-# Python 的 lambda 只能写单行表达式，没有 Kotlin 的花括号 lambda 强大
-multiply = lambda x, y: x * y
-print(f"Lambda result: {multiply(3, 4)}")
-
+for name in names:
+    print(name)
 
 # ==========================================
-# 6. 类与对象 (Classes & Objects)
+# 9. while
 # ==========================================
-print("\n--- 6. Classes ---")
 
-# 普通类
-class Animal:
-    # 构造函数 (相当于 Kotlin 的 init 块和主构造函数)
-    # self 等同于 Kotlin 的 this，但在 Python 中必须显式作为第一个参数写出来！
-    def __init__(self, name: str):
-        self.name = name # 定义实例属性
+print("\n===== 9. while =====")
 
-    def speak(self):
-        print(f"{self.name} makes a sound.")
+i = 0
 
-# 继承 (把父类写在括号里)
-class Dog(Animal):
-    def speak(self):
-        print(f"{self.name} barks!") # 覆写方法不需要 override 关键字
-
-dog = Dog("Buddy") # 实例化对象不需要 new 关键字
-dog.speak()
-
-# 数据类 Data Class (Python 3.7+ 引入，简直就是为 Kotlin 开发者量身定制的！)
-# 行为和 Kotlin 的 data class 几乎一模一样 (自动生成 __init__, __repr__, __eq__)
-@dataclass
-class User:
-    id: int
-    username: str
-    is_active: bool = True
-
-user1 = User(1, "john_doe")
-print(user1) # 输出: User(id=1, username='john_doe', is_active=True)
-
+while i < 5:
+    print(i)
+    i += 1
 
 # ==========================================
-# 7. 异常处理 (Exceptions)
+# 10. function
 # ==========================================
-print("\n--- 7. Exceptions ---")
 
-# 类似于 Kotlin 的 try-catch-finally
+print("\n===== 10. function =====")
+
+
+def add(a: int, b: int) -> int:
+    return a + b
+
+
+result = add(1, 2)
+
+print(result)
+
+# ==========================================
+# 11. 函数默认参数
+# ==========================================
+
+print("\n===== 11. 默认参数 =====")
+
+
+def greet(name="Tom"):
+    print(f"Hello {name}")
+
+
+greet()
+greet("Alice")
+
+# ==========================================
+# 12. class
+# ==========================================
+
+print("\n===== 12. class =====")
+
+
+class Person:
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def say_hello(self):
+        print(f"Hello, I'm {self.name}")
+
+
+person = Person("Tom", 18)
+
+print(person.name)
+print(person.age)
+
+person.say_hello()
+
+# ==========================================
+# 13. import
+# ==========================================
+
+print("\n===== 13. import =====")
+
+import math
+
+print(math.sqrt(16))
+print(math.pi)
+
+# ==========================================
+# 14. try / except
+# ==========================================
+
+print("\n===== 14. try / except =====")
+
 try:
-    result = 10 / 0
-except ZeroDivisionError as e: # catch (e: ZeroDivisionError)
-    print(f"Caught an error: {e}")
-finally:
-    print("This always runs.")
+    x = 10 / 0
+    print(x)
+except Exception as e:
+    print("发生异常：", e)
+
+# ==========================================
+# 15. List Comprehension
+# ==========================================
+
+print("\n===== 15. List Comprehension =====")
+
+numbers = [1, 2, 3, 4, 5]
+
+# 普通写法
+result = []
+
+for n in numbers:
+    if n % 2 == 0:
+        result.append(n)
+
+print("普通写法：", result)
+
+# Python 写法
+result = [n for n in numbers if n % 2 == 0]
+
+print("List Comprehension：", result)
+
+# ==========================================
+# 16. 一个简单的 Android Log 分析例子
+# ==========================================
+
+print("\n===== 16. Android Log 分析 =====")
+
+logs = [
+    "INFO Activity started",
+    "ERROR MediaCodec failed",
+    "INFO Activity stopped",
+    "ERROR MediaCodec timeout",
+    "INFO Player started",
+    "ERROR MediaCodec crash"
+]
+
+# 找出所有 ERROR
+for log in logs:
+    if "ERROR" in log:
+        print(log)
+
+# 使用 List Comprehension
+errors = [log for log in logs if "ERROR" in log]
+
+print("\n所有 ERROR：")
+print(errors)
+
+# ==========================================
+# 17. 综合练习
+# ==========================================
+
+print("\n===== 17. 综合练习 =====")
+
+students = [
+    {"name": "Tom", "score": 90},
+    {"name": "Bob", "score": 60},
+    {"name": "Alice", "score": 95},
+    {"name": "Jack", "score": 70},
+]
+
+# 找出分数 >= 80 的学生
+good_students = [
+    student
+    for student in students
+    if student["score"] >= 80
+]
+
+print("优秀学生：")
+
+for student in good_students:
+    print(
+        f"name={student['name']}, "
+        f"score={student['score']}"
+    )
+
+# ==========================================
+# 18. 一个稍微真实一点的脚本
+# ==========================================
+
+print("\n===== 18. 综合脚本 =====")
+
+
+def analyze_logs(logs):
+    """
+    分析日志，统计 ERROR 数量
+    """
+
+    error_logs = [
+        log
+        for log in logs
+        if "ERROR" in log
+    ]
+
+    return error_logs
+
+
+logs = [
+    "INFO Activity start",
+    "INFO MediaPlayer start",
+    "ERROR MediaCodec failed",
+    "INFO Activity resume",
+    "ERROR MediaCodec timeout",
+    "INFO Activity pause",
+]
+
+errors = analyze_logs(logs)
+
+print("ERROR 数量：", len(errors))
+
+for error in errors:
+    print(error)
+
+# ==========================================
+# 结束
+# ==========================================
+
+print("\n==========================================")
+print("Python 基础语法练习完成！")
+print("==========================================")
+
+class Student:
+    def __init__(self, name: str, id: int):
+        self.name = name
+        self.id = id
+
+    def print_info(self):
+        print(f"Student {self.name}, ID {self.id}")
+
+student = Student("Tom", 1)
+student.print_info()
